@@ -8,7 +8,7 @@ import Logger from '../logger/logger';
  */
 export default class SQLiteInterface {
   protected log_: Logger;
-  private db_: Database;
+  private db_:    Database;
 
   private ready_: Promise<void>;
   get ready() {
