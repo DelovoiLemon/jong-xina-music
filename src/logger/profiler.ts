@@ -2,8 +2,8 @@ import Logger from './logger';
 
 export type LevelThresholds = {
   debug?: number;
-  info?: number;
-  warn?: number;
+  info?:  number;
+  warn?:  number;
   error?: number;
   fatal?: number;
 };
@@ -14,8 +14,8 @@ export type LevelThresholds = {
  * Logs a message once stop() is called
  */
 export default class Profiler {
-  private logger_: Logger;
-  private name_: string;
+  private logger_:     Logger;
+  private name_:       string;
   private start_time_: number;
   private duration_ = -1;
   private level_thresholds_: LevelThresholds = { debug: 0 };
@@ -26,9 +26,9 @@ export default class Profiler {
    * @param level_thresholds - optional thresholds for severity of logs (in milliseconds)
    */
   constructor(logger: Logger, name: string, level_thresholds?: LevelThresholds) {
-    this.logger_ = logger;
-    this.name_ = name;
-    this.start_time_ = Date.now();
+    this.logger_           = logger;
+    this.name_             = name;
+    this.start_time_       = Date.now();
     this.level_thresholds_ = level_thresholds;
   }
 
@@ -48,10 +48,10 @@ export default class Profiler {
     // determine level based on thresholds
     let level = 'debug';
     if (this.level_thresholds_) {
-      if (this.duration_ >= this.level_thresholds_.fatal) level = 'fatal';
+      if (this.duration_ >= this.level_thresholds_.fatal)      level = 'fatal';
       else if (this.duration_ >= this.level_thresholds_.error) level = 'error';
-      else if (this.duration_ >= this.level_thresholds_.warn) level = 'warn';
-      else if (this.duration_ >= this.level_thresholds_.info) level = 'info';
+      else if (this.duration_ >= this.level_thresholds_.warn)  level = 'warn';
+      else if (this.duration_ >= this.level_thresholds_.info)  level = 'info';
       else level = 'debug';
     }
     // override level if level is given explicitly
@@ -71,8 +71,8 @@ export default class Profiler {
     }
 
     if (level === 'debug') this.logger_.debug(message);
-    if (level === 'info') this.logger_.info(message);
-    if (level === 'warn') this.logger_.warn(message);
+    if (level === 'info')  this.logger_.info(message);
+    if (level === 'warn')  this.logger_.warn(message);
     if (level === 'error') this.logger_.error(message);
     if (level === 'fatal') this.logger_.fatal(message);
 

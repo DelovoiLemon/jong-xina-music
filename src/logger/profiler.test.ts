@@ -10,15 +10,15 @@ describe('Profiler', () => {
   });
 
   it('returns accurate time and writes default log message', () => {
-    const clock = sinon.useFakeTimers();
+    const clock     = sinon.useFakeTimers();
 
-    const logger = new Logger('TestLogger');
+    const logger    = new Logger('TestLogger');
     const debug_spy = sinon.spy(logger, 'debug');
 
-    const profile0 = logger.profile('profile0');
+    const profile0  = logger.profile('profile0');
 
     clock.tick(100);
-    const time = profile0.stop();
+    const time      = profile0.stop();
     clock.restore();
 
     assert(
@@ -30,14 +30,14 @@ describe('Profiler', () => {
   });
 
   it('writes custom log message and success', async () => {
-    const clock = sinon.useFakeTimers();
+    const clock     = sinon.useFakeTimers();
 
-    const logger = new Logger('TestLogger');
+    const logger    = new Logger('TestLogger');
     const debug_spy = sinon.spy(logger, 'debug');
 
-    const profile0 = logger.profile('profile0');
-    const profile1 = logger.profile('profile1');
-    const profile2 = logger.profile('profile2');
+    const profile0  = logger.profile('profile0');
+    const profile1  = logger.profile('profile1');
+    const profile2  = logger.profile('profile2');
 
     clock.tick(100);
     profile0.stop({ message: 'with message' });
@@ -57,18 +57,18 @@ describe('Profiler', () => {
     const clock = sinon.useFakeTimers();
     sinon.stub(process, 'exit');
 
-    const logger = new Logger('TestLogger');
+    const logger    = new Logger('TestLogger');
     const debug_spy = sinon.spy(logger, 'debug');
-    const info_spy = sinon.spy(logger, 'info');
-    const warn_spy = sinon.spy(logger, 'warn');
+    const info_spy  = sinon.spy(logger, 'info');
+    const warn_spy  = sinon.spy(logger, 'warn');
     const error_spy = sinon.spy(logger, 'error');
     const fatal_spy = sinon.spy(logger, 'fatal');
 
-    const profile0 = logger.profile('profile0');
-    const profile1 = logger.profile('profile1');
-    const profile2 = logger.profile('profile2');
-    const profile3 = logger.profile('profile3');
-    const profile4 = logger.profile('profile4');
+    const profile0  = logger.profile('profile0');
+    const profile1  = logger.profile('profile1');
+    const profile2  = logger.profile('profile2');
+    const profile3  = logger.profile('profile3');
+    const profile4  = logger.profile('profile4');
 
     clock.tick(100);
     profile0.stop({ level: 'debug' });
@@ -104,19 +104,19 @@ describe('Profiler', () => {
     const clock = sinon.useFakeTimers();
     sinon.stub(process, 'exit');
 
-    const logger = new Logger('TestLogger');
+    const logger    = new Logger('TestLogger');
     const debug_spy = sinon.spy(logger, 'debug');
-    const info_spy = sinon.spy(logger, 'info');
-    const warn_spy = sinon.spy(logger, 'warn');
+    const info_spy  = sinon.spy(logger, 'info');
+    const warn_spy  = sinon.spy(logger, 'warn');
     const error_spy = sinon.spy(logger, 'error');
     const fatal_spy = sinon.spy(logger, 'fatal');
 
-    const profile0 = logger.profile('profile0', { debug: 100, info: 100, warn: 100, error: 100, fatal: 100 });
-    const profile1 = logger.profile('profile1', { debug: 100, info: 100, warn: 100, error: 100, fatal: 101 });
-    const profile2 = logger.profile('profile2', { debug: 100, info: 100, warn: 100, error: 101, fatal: 101 });
-    const profile3 = logger.profile('profile3', { debug: 100, info: 100, warn: 101, error: 101, fatal: 101 });
-    const profile4 = logger.profile('profile4', { debug: 100, info: 101, warn: 101, error: 101, fatal: 101 });
-    const profile5 = logger.profile('profile5', { debug: 101, info: 101, warn: 101, error: 101, fatal: 101 });
+    const profile0  = logger.profile('profile0', { debug: 100, info: 100, warn: 100, error: 100, fatal: 100 });
+    const profile1  = logger.profile('profile1', { debug: 100, info: 100, warn: 100, error: 100, fatal: 101 });
+    const profile2  = logger.profile('profile2', { debug: 100, info: 100, warn: 100, error: 101, fatal: 101 });
+    const profile3  = logger.profile('profile3', { debug: 100, info: 100, warn: 101, error: 101, fatal: 101 });
+    const profile4  = logger.profile('profile4', { debug: 100, info: 101, warn: 101, error: 101, fatal: 101 });
+    const profile5  = logger.profile('profile5', { debug: 101, info: 101, warn: 101, error: 101, fatal: 101 });
 
     clock.tick(100);
     profile0.stop();
@@ -157,18 +157,18 @@ describe('Profiler', () => {
     const clock = sinon.useFakeTimers();
     sinon.stub(process, 'exit');
 
-    const logger = new Logger('TestLogger');
-    const info_spy = sinon.spy(logger, 'info');
+    const logger    = new Logger('TestLogger');
+    const info_spy  = sinon.spy(logger, 'info');
     const error_spy = sinon.spy(logger, 'error');
     const fatal_spy = sinon.spy(logger, 'fatal');
 
-    const profile0 = logger.profile('profile0', { debug: 100, info: 100, warn: 100, error: 100, fatal: 101 });
-    const profile1 = logger.profile('profile1');
-    const profile2 = logger.profile('profile2');
+    const profile0  = logger.profile('profile0', { debug: 100, info: 100, warn: 100, error: 100, fatal: 101 });
+    const profile1  = logger.profile('profile1');
+    const profile2  = logger.profile('profile2');
 
     clock.tick(100);
-    profile0.stop({ message: 'with message', level: 'info', success: false });
-    profile1.stop({ level: 'fatal', success: false });
+    profile0.stop({ message: 'with message', level: 'info',  success: false });
+    profile1.stop({                          level: 'fatal', success: false });
     profile2.stop({ message: 'with message', level: 'error', success: true });
     clock.restore();
 

@@ -10,32 +10,32 @@ import { FunctionResponse, FunctionRequest, JSONAble } from './ipc_types';
  * IPCInterface - Template code for IPC Interfacess
  */
 export default class IPCInterface<FunctionNames> {
-  private events_ = new EventEmitter();
+  private events_  = new EventEmitter();
 
-  private ipc_ = new ipc.IPC();
+  private ipc_     = new ipc.IPC();
   private ipc_id_: string;
-  private queue_: Array<FunctionRequest<FunctionNames>> = [];
+  private queue_:  Array<FunctionRequest<FunctionNames>> = [];
 
   private counter_ = Date.now() * 1000;
-  private ready_ = false;
+  private ready_   = false;
   private running_ = false;
 
-  private log_: Logger;
+  private log_:   Logger;
 
   /**
    * @param ipc_id - ipc_id of IPC process to interface with
    * @param logger - logger
    */
   constructor(ipc_id: string, logger: Logger) {
-    this.log_ = logger;
+    this.log_     = logger;
 
-    this.ipc_id_ = ipc_id;
+    this.ipc_id_  = ipc_id;
 
-    this.ipc_.config.retry = ipc_config.retry;
-    this.ipc_.config.silent = ipc_config.silent;
+    this.ipc_.config.retry     = ipc_config.retry;
+    this.ipc_.config.silent    = ipc_config.silent;
     this.ipc_.config.rawBuffer = ipc_config.rawBuffer;
-    this.ipc_.config.appspace = ipc_config.app_namespace;
-    this.ipc_.config.id = ipc_id + '-Interface-' + Date.now().toString();
+    this.ipc_.config.appspace  = ipc_config.app_namespace;
+    this.ipc_.config.id        = ipc_id + '-Interface-' + Date.now().toString();
 
     this.log_.debug(`Attempting ipc connection to {id:${ipc_id}} in {namespace:${ipc_config.app_namespace}}`);
     this.ipc_.connectTo(ipc_id, () => {
@@ -48,7 +48,7 @@ export default class IPCInterface<FunctionNames> {
       });
 
       connection.on('disconnect', () => {
-        this.ready_ = false;
+        this.ready_   = false;
         this.running_ = false;
         this.log_.warn(`ipc connection to {id:${ipc_id}} in {namespace:${ipc_config.app_namespace}} disconnected`);
       });

@@ -14,17 +14,17 @@ import { FunctionRequest, JSONAble } from './ipc_types';
 export default function StartIPCServer<FunctionNames>(
   ipc_id: string,
   logger: Logger,
-  ready: Promise<void>,
+  ready:  Promise<void>,
   run_function: (function_name: FunctionNames, args: Array<any>) => Promise<JSONAble>
 ): typeof ipc {
   ready.catch((error) => {
     logger.fatal(`Error getting component with {id:${ipc_id}} ready`, error);
   });
 
-  ipc.config.silent = ipc_config.silent;
+  ipc.config.silent    = ipc_config.silent;
   ipc.config.rawBuffer = ipc_config.rawBuffer;
-  ipc.config.appspace = ipc_config.app_namespace;
-  ipc.config.id = ipc_id;
+  ipc.config.appspace  = ipc_config.app_namespace;
+  ipc.config.id        = ipc_id;
 
   logger.debug(`Starting ipc server in {namespace:${ipc_config.app_namespace}} and {id:${ipc_id}}`);
   ipc.serve(() => {

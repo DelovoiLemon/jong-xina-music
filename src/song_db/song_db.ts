@@ -27,22 +27,22 @@ export enum SongDBFunctions {
 }
 
 export type CacheInfo = {
-  song_uid: string;
-  cached: boolean;
-  cache_location: string;
-  start_chunk: number;
-  end_chunk: number;
-  size_bytes: number;
-  playbacks: number;
+  song_uid:        string;
+  cached:          boolean;
+  cache_location:  string;
+  start_chunk:     number;
+  end_chunk:       number;
+  size_bytes:      number;
+  playbacks:       number;
   size_over_plays: number;
 };
 export type SongInfo = {
-  song_uid: string;
-  link: string;
+  song_uid:      string;
+  link:          string;
   thumbnail_url: string;
-  title: string;
-  artist: string;
-  duration: number;
+  title:         string;
+  artist:        string;
+  duration:      number;
 };
 
 // Info about the tables needed for SongDB
@@ -98,13 +98,13 @@ export default class SongDB extends SQLiteInterface {
     if (results.length === 0) throw new Error('Song does not exist in song database');
 
     return {
-      song_uid: results[0].song_uid,
-      cached: results[0].cached === 1,
-      cache_location: results[0].cache_location,
-      start_chunk: results[0].start_chunk,
-      end_chunk: results[0].end_chunk,
-      size_bytes: results[0].size_bytes,
-      playbacks: results[0].playbacks,
+      song_uid:        results[0].song_uid,
+      cached:          results[0].cached === 1,
+      cache_location:  results[0].cache_location,
+      start_chunk:     results[0].start_chunk,
+      end_chunk:       results[0].end_chunk,
+      size_bytes:      results[0].size_bytes,
+      playbacks:       results[0].playbacks,
       size_over_plays: results[0].size_over_plays,
     };
   }
@@ -122,12 +122,12 @@ export default class SongDB extends SQLiteInterface {
     if (results.length === 0) throw new Error('Song does not exist in song database');
 
     return {
-      song_uid: results[0].song_uid,
-      link: results[0].link,
+      song_uid:      results[0].song_uid,
+      link:          results[0].link,
       thumbnail_url: results[0].thumbnail_url,
-      title: results[0].title,
-      artist: results[0].artist,
-      duration: results[0].duration,
+      title:         results[0].title,
+      artist:        results[0].artist,
+      duration:      results[0].duration,
     };
   }
 
@@ -401,13 +401,13 @@ export default class SongDB extends SQLiteInterface {
     if (results[0]['MAX(size_over_plays)'] === 0) return {};
 
     return {
-      song_uid: results[0].song_uid,
-      cached: results[0].cached === 1,
-      cache_location: results[0].cache_location,
-      start_chunk: results[0].start_chunk,
-      end_chunk: results[0].end_chunk,
-      size_bytes: results[0].size_bytes,
-      playbacks: results[0].playbacks,
+      song_uid:        results[0].song_uid,
+      cached:          results[0].cached === 1,
+      cache_location:  results[0].cache_location,
+      start_chunk:     results[0].start_chunk,
+      end_chunk:       results[0].end_chunk,
+      size_bytes:      results[0].size_bytes,
+      playbacks:       results[0].playbacks,
       size_over_plays: results[0].size_over_plays,
     };
   }

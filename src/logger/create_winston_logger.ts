@@ -13,8 +13,8 @@ export default function createWinstonLogger(name: string, config: LoggerConfig) 
   // Create winston logger
   const transports: Array<winston.transport> = [];
   const logger = winston.createLogger({
-    level: 'debug',
-    levels: logLevels,
+    level:       'debug',
+    levels:      logLevels,
     exitOnError: false,
   });
 
@@ -26,23 +26,23 @@ export default function createWinstonLogger(name: string, config: LoggerConfig) 
       winston.format.json()
     );
     const debug_transport = new winston.transports.DailyRotateFile({
-      level: 'debug',
-      dirname: config.file_directory,
-      filename: `${name}-Debug-${config.file_name}`,
-      datePattern: config.date_pattern,
+      level:         'debug',
+      dirname:       config.file_directory,
+      filename:      `${name}-Debug-${config.file_name}`,
+      datePattern:   config.date_pattern,
       zippedArchive: config.zip_logs,
-      maxSize: config.max_size,
-      maxFiles: config.max_files,
+      maxSize:       config.max_size,
+      maxFiles:      config.max_files,
       format,
     });
     const info_transport = new winston.transports.DailyRotateFile({
-      level: 'info',
-      dirname: config.file_directory,
-      filename: `${name}-Info-${config.file_name}`,
-      datePattern: config.date_pattern,
+      level:         'info',
+      dirname:       config.file_directory,
+      filename:      `${name}-Info-${config.file_name}`,
+      datePattern:   config.date_pattern,
       zippedArchive: config.zip_logs,
-      maxSize: config.max_size,
-      maxFiles: config.max_files,
+      maxSize:       config.max_size,
+      maxFiles:      config.max_files,
       format,
     });
     transports.push(debug_transport);
@@ -55,8 +55,8 @@ export default function createWinstonLogger(name: string, config: LoggerConfig) 
   // Add some colors to console output
   winston.addColors({
     debug: 'blue',
-    info: 'green',
-    warn: 'yellow',
+    info:  'green',
+    warn:  'yellow',
     error: 'red',
   });
   logger.add(

@@ -21,8 +21,7 @@ export const default0 = Object.freeze({
   song_info: {
     song_uid: 'yt$M1vsdF4VfUo',
     link: 'https://www.youtube.com/watch?v=M1vsdF4VfUo',
-    thumbnail_url:
-      'https://i.ytimg.com/vi/OSz516-6IR4/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLDSbi0rVlwaHd-iNfSxF5ZAqSypVQ',
+    thumbnail_url: 'https://i.ytimg.com/vi/OSz516-6IR4/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLDSbi0rVlwaHd-iNfSxF5ZAqSypVQ',
     title: 'A New Era Begins',
     artist: 'Evan Call - Topic',
     duration: 132,

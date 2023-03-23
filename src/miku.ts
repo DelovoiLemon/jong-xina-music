@@ -3,6 +3,6 @@ import SongDBInterface from './song_db/song_db_ipc_interface';
 import Logger from './logger/logger';
 
 StartComponents().then(() => {
-  const logger = new Logger('Miku');
+  const logger  = new Logger('XINA');
   const song_db = new SongDBInterface(logger);
 });

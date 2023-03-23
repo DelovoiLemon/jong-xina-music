@@ -10,7 +10,7 @@ import { logger_config } from '../constants/constants';
  */
 export default class Logger {
   private transports_: Array<winston.transport> = [];
-  private logger_: winston.Logger;
+  private logger_:     winston.Logger;
 
   /**
    * @param name - Name of logger

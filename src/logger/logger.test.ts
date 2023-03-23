@@ -20,14 +20,14 @@ describe('Logger', () => {
   beforeEach(() => {
     stubConfig({
       logger_config: {
-        log_file: true,
-        log_console: false,
+        log_file:       true,
+        log_console:    false,
         file_directory: LOG_FILE_DIRECTORY,
-        file_name: '%DATE%.log',
-        date_pattern: 'YYYY-MM-DD',
-        zip_logs: false,
-        max_size: '20m',
-        max_files: '5',
+        file_name:      '%DATE%.log',
+        date_pattern:   'YYYY-MM-DD',
+        zip_logs:       false,
+        max_size:       '20m',
+        max_files:      '5',
       },
     });
   });
@@ -115,32 +115,32 @@ describe('Logger', () => {
 
       const expected_debug = [
         { level: 'debug', message: 'debug0' },
-        { level: 'info', message: 'info0' },
-        { level: 'warn', message: 'warn0' },
+        { level: 'info',  message: 'info0' },
+        { level: 'warn',  message: 'warn0' },
         {
-          level: 'warn',
+          level:   'warn',
           message: 'warn1 - Some small error',
-          stack: 'Some small error',
+          stack:   'Some small error',
         },
         {
-          level: 'error',
+          level:   'error',
           message: 'error0 - error0',
-          stack: 'error0',
+          stack:   'error0',
         },
         {
-          level: 'error',
+          level:   'error',
           message: 'error1 - Some error',
-          stack: 'Some error',
+          stack:   'Some error',
         },
         {
-          level: 'error',
+          level:   'error',
           message: '[FATAL] fatal0 - fatal0',
-          stack: 'fatal0',
+          stack:   'fatal0',
         },
         {
-          level: 'error',
+          level:   'error',
           message: '[FATAL] fatal1 - Some fatal error',
-          stack: 'Some fatal error',
+          stack:   'Some fatal error',
         },
       ];
       const expected_info = filter_debug(expected_debug);

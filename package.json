@@ -1,5 +1,5 @@
 {
-  "name": "miku-discordmusicbot",
+  "name": "jong-xina-discordmusicbot",
   "version": "3.0.0",
   "description": "A discord bot that plays music from youtube and local files and can also apply ffmpeg audio effects. ",
   "main": "index.js",
@@ -17,14 +17,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Miku-Music-Bot/Miku-DiscordMusicBot.git"
+    "url": "git+https://github.com/DelovoiLemon/jong-xina-music.git"
   },
-  "author": "Bwu1324",
+  "author": "DelovoiLemon",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/Miku-Music-Bot/Miku-DiscordMusicBot/issues"
+    "url": "https://github.com/DelovoiLemon/jong-xina-music/issues"
   },
-  "homepage": "https://github.com/Miku-Music-Bot/Miku-DiscordMusicBot#readme",
+  "homepage": "https://github.com/DelovoiLemon/jong-xina-music#readme",
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@types/chai": "^4.3.4",

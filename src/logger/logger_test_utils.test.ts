@@ -10,28 +10,28 @@ export const LOG_FILE_DIRECTORY = path.join(__dirname, 'test_logs');
  * @returns - date string
  */
 export function format_date(date: number) {
-  const d = new Date(date);
-  let month = '' + (d.getMonth() + 1);
-  let day = '' + d.getDate();
+  const d    = new Date(date);
+  let month  = '' + (d.getMonth() + 1);
+  let day    = '' + d.getDate();
   const year = d.getFullYear();
 
   if (month.length < 2) month = '0' + month;
-  if (day.length < 2) day = '0' + day;
+  if (day.length < 2) day     = '0' + day;
 
   return `${year}-${month}-${day}`;
 }
 
 type LogProperties = {
-  level: string;
-  message: string;
+  level:      string;
+  message:    string;
   timestamp?: string;
-  stack?: string;
+  stack?:     string;
 };
 
 type ExpectedLogProperties = {
-  level: string;
+  level:   string;
   message: string;
-  stack?: string;
+  stack?:  string;
 };
 
 /**
@@ -49,7 +49,7 @@ export function fetch_log(logger_name: string): { debug: Array<LogProperties>; i
     .split('\r');
 
   const debug: Array<LogProperties> = [];
-  const info: Array<LogProperties> = [];
+  const info:  Array<LogProperties> = [];
 
   for (let i = 0; i < debug_logs.length; i++) {
     // ignore empty strings (\n counts as 1)

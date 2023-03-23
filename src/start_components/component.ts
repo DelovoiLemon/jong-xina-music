@@ -10,7 +10,7 @@ export default class Component {
     return this.events_;
   }
 
-  private component_name_: string;
+  private component_name_:   string;
   private js_file_location_: string;
 
   private log_: Logger;

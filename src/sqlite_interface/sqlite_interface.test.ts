@@ -35,7 +35,7 @@ describe('SQLite Interface', () => {
         cols: '(col1 STRING, col2 INT)',
       },
     ];
-    const db_location = path.join(__dirname, '..', '..', 'src', 'sqlite_interface', 'sqlite_interface.test.db');
+    const db_location      = path.join(__dirname, '..', '..', 'src', 'sqlite_interface', 'sqlite_interface.test.db');
     const sqlite_interface = new SQLiteInterfaceTester(db_location, tables, createLoggerStub());
 
     const rows = await sqlite_interface.dbAll('SELECT * FROM test_table', {});
