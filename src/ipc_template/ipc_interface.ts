@@ -5,6 +5,7 @@ import { ipc_config } from '../constants/constants';
 import Logger from '../logger/logger';
 
 import { FunctionResponse, FunctionRequest, JSONAble } from './ipc_types';
+import { Message } from 'discord.js';
 
 /**
  * IPCInterface - Template code for IPC Interfacess
@@ -20,7 +21,7 @@ export default class IPCInterface<FunctionNames> {
   private ready_   = false;
   private running_ = false;
 
-  private log_:   Logger;
+  protected log_:   Logger;
 
   /**
    * @param ipc_id - ipc_id of IPC process to interface with

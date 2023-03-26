@@ -26,6 +26,7 @@ const WEB_PANEL_PORT     = parseInt(process.env.WEB_PANEL_PORT);
 
 // Guild 
 const DISCORD_TOKEN      = process.env.DISCORD_TOKEN;
+const GUILD_CREATE_RATE  = parseInt(process.env.GUILD_CREATE_RATE);
 const MAX_RESPONSE_WAIT  = parseInt(process.env.MAX_RESPONSE_WAIT);
 
 export type IPCConfig = {
@@ -38,7 +39,8 @@ export type IPCConfig = {
   music_ipc_id:     string;
   song_db_ipc_id:   string;
   web_panel_ipc_id: string;
-  gh_ipc_id:        string;
+  gh_child_ipc_id: string;
+  g_master_ipc_id:  string;
 };
 export const ipc_config: IPCConfig = Object.freeze({
   retry:      100,
@@ -50,7 +52,8 @@ export const ipc_config: IPCConfig = Object.freeze({
   music_ipc_id:     'Jong-Xina-Music-Cache',
   song_db_ipc_id:   'Jong-Xina-Song-DB',
   web_panel_ipc_id: 'Jong-Xina-Web-Panel',
-  gh_ipc_id:        'Jong-Xina-Guild-Handler',
+  gh_child_ipc_id:  'Jong-Xina-Guild-Handler-Child',
+  g_master_ipc_id:  'Jong-Xina-Guild-Master',
 });
 
 export type LoggerConfig = {
@@ -114,9 +117,11 @@ export const bot_master_config: BotMasterConfig = Object.freeze({
 
 export type GuildHandlerConfig = {
   discord_token:     string;
+  guild_create_rate: number;
   max_response_wait: number;
 };
 export const guild_config: GuildHandlerConfig = Object.freeze({
   discord_token:     DISCORD_TOKEN,
+  guild_create_rate: GUILD_CREATE_RATE,
   max_response_wait: MAX_RESPONSE_WAIT
 });

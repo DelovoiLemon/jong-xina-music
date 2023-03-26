@@ -5,18 +5,21 @@ import express from 'express';
 import { web_config } from '../constants/constants';
 import Logger from '../logger/logger';
 
+
 export enum WebPanelFunctions {
-    startWebServer
+  startWebServer,
+  stopWebServer
 }
 
 export default class WebPanel {
     private log_: Logger;
-
+    private app;
     /**
      * @param logger - logger
      */
     constructor(logger: Logger) {
         this.log_ = logger;
+        this.app = express();
     }
 
 
@@ -81,27 +84,39 @@ export default class WebPanel {
     async startWebServer(): Promise<void> {
         this.log_.profile('(1.0) Start Web Server');
 
-        const app = express();
-        app.use(express.static(web_config.default_thumbnail_url));
+        this.app.use(express.static(web_config.default_thumbnail_url));
 
-        app.use('/',           await this.createMainRouter());
-        app.use('/admin',      await this.createAdminRouter());
-        app.use('/thumbnails', await this.createThumbnailRouter());
-        app.use('/guild',      await this.createGuildRouter());
+        this.app.use('/',           await this.createMainRouter());
+        this.app.use('/admin',      await this.createAdminRouter());
+        this.app.use('/thumbnails', await this.createThumbnailRouter());
+        this.app.use('/guild',      await this.createGuildRouter());
+        
+        this.app.on("Web Panel", () => {
+            this.log_.info("New connection to Web Server");
+        });
 
         return new Promise((resolve, reject) => {
             try {
-                app.listen(web_config.port, () => {
-                    this.log_.info(`Webserver listening on {port:${web_config.port}}`);
-                    this.log_.profile('(1.0) Start Web Server');
-                    }
-                );
+                this.app.listen(web_config.port, web_config.domain);
+                this.log_.info(`Webserver listening on {port:${web_config.port}}`);
+                this.log_.profile('(1.0) Start Web Server');
             }
             catch (error) {
                 this.log_.error(`{error:${error.message}} while starting webserver`, error);
                 this.log_.profile('(1.0) Start Web Server');
                 reject();
             }
+        });
+
+        
+
+
+    }
+    async stopWebServer(): Promise<void> {
+        this.app.removeListener("Web Panel", () => {
+            this.log_.info(`Webserver stopped on {port:${web_config.port}}`);
+            this.log_.profile('(1.0) Stop Web Server');
+                    
         });
     }
 }

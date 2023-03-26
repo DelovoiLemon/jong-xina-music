@@ -1,26 +1,20 @@
 
 import Logger from '../logger/logger';
+import GuildHandler from '../guild_handler/guild_handler';
 
-export class GuildHandlerInterface {
-	private _log: Logger;
-	private _id:  string;
+export enum GuildMasterFunctions {
+    getGuild,
+	newGuild,
+	rmGuild,
+}
 
-	constructor(id: string, log: Logger) {
-		this._id = id;
-		this._log = log;
-	}
-
-	removeGuild() {
-		//remove
-	}
-};
 /**
- * @name BotMaster
+ * @name GuildMaster
  * Handles adding, getting, and removing guild handlers
  */
-export default class BotMaster {
+export default class GuildMaster {
 	private _log: Logger;
-	private _guildList: { [key: string]: GuildHandlerInterface };
+	private _guildList: { [key: string]: GuildHandler };
 
 	/**
 	 * @param logger - logger object
@@ -36,7 +30,7 @@ export default class BotMaster {
 	 * @param id - discord guild id
 	 * @return GHInterface or undefined if not found
 	 */
-	getGuild(id: string): GuildHandlerInterface | undefined { return this._guildList[id]; }
+	getGuild(id: string): GuildHandler | undefined { return this._guildList[id]; }
 
 	/**
 	 * @name newGuild()
@@ -46,7 +40,7 @@ export default class BotMaster {
 	 */
 	newGuild(id: string): void {
 		if (!this.getGuild(id)) {
-			const newGuild = new GuildHandlerInterface(id, this._log);
+			const newGuild = new GuildHandler(id, this._log);
 			this._guildList[id] = newGuild;
 		}
 	}
@@ -56,8 +50,8 @@ export default class BotMaster {
 	 * Removes guild handler with matching id
 	 * @param id - discord guild id string
 	 */
-	removeGuild(id: string): void {
-		this._guildList[id].removeGuild();
+	rmGuild(id: string): void {
+		this._guildList[id].rmGuild();
 		this._guildList[id] = undefined;
 	}
 }
