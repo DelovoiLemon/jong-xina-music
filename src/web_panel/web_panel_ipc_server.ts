@@ -13,7 +13,7 @@ export function StartWebComponent(): typeof ipc {
   return StartIPCServer<WebPanelFunctions>(ipc_config.web_panel_ipc_id, logger, Promise.resolve(), async (function_name, args) => {
     switch (function_name) {
       case WebPanelFunctions.startWebServer: {
-        web_panel.startWebServer(args[0]);
+        web_panel.startWebServer();
         return '';
       }
     }

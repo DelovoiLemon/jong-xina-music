@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config({ path: path.join(__dirname, '..', '..', '.env') });
 
 // load environment variables
+// LOGGING
 const LOG_FILE           = process.env.LOG_FILE === 'true';
 const LOG_CONSOLE        = process.env.LOG_CONSOLE === 'true';
 const LOG_FILE_DIRECTORY = process.env.LOG_FILE_DIRECTORY;
@@ -12,26 +13,20 @@ const ZIP_LOGS           = process.env.ZIP_LOGS === 'true';
 const LOG_MAX_SIZE       = process.env.LOG_MAX_SIZE;
 const LOG_MAX_FILES      = process.env.LOG_MAX_FILES;
 
+// Songs DB
 const SONG_DB_LOCATION   = process.env.SONG_DB_LOCATION;
 
+// Music Cache
 const CACHE_DIRECTORY    = process.env.CACHE_DIRECTORY;
 const MAX_CACHESIZE_MiB  = parseInt(process.env.MAX_CACHESIZE_MiB);
 
+// Web Panel
 const XINA_DOMAIN        = process.env.XINA_DOMAIN;
 const WEB_PANEL_PORT     = parseInt(process.env.WEB_PANEL_PORT);
-const GOOGLE_TOKEN_LOC   = process.env.GOOGLE_TOKEN_LOC;
-const GOOGLE_SCOPE       = process.env.GOOGLE_SCOPE;
-const GOOGLE_CLIENT_ID   = process.env.GOOGLE_CLIENT_ID;
-const GOOGLE_CLIENT_SEC  = process.env.GOOGLE_CLIENT_SECRET;
-const GOOGLE_REDIRECT_URI = process.env.GOOGLE_REDIRECT_URI;
 
-const MAX_RESPONSE_WAIT  = parseInt(process.env.MAX_RESPONSE_WAIT); 
+// Guild 
 const DISCORD_TOKEN      = process.env.DISCORD_TOKEN;
-const MONGODB_URI        = process.env.MONGODB_URI;
-const MAX_SONG_INFO_LENGTH = parseInt(process.env.MAX_SONG_INFO_LENGTH);
-const PROGRESS_BAR_LENGTH  = parseInt(process.env.PROGRESS_BAR_LENGTH);
-const MAX_YT_RESULTS     = parseInt(process.env.MAX_YT_RESULTS);
-const SHOW_NUM_ITEMS     = parseInt(process.env.SHOW_NUM_ITEMS);
+const MAX_RESPONSE_WAIT  = parseInt(process.env.MAX_RESPONSE_WAIT);
 
 export type IPCConfig = {
   retry:     number;
@@ -103,21 +98,11 @@ export type WebConfig = {
   port:                  number;
   domain:                string;
   default_thumbnail_url: string;
-  google_token_loc:      string;
-  google_scope:          string;
-  google_client_secret:  string;
-  google_client_id:      string;
-  google_redirect_uri:   string;
 };
 export const web_config: WebConfig = Object.freeze({
   port:                  WEB_PANEL_PORT,
   domain:                XINA_DOMAIN,
   default_thumbnail_url: `${XINA_DOMAIN}/thumbnails/default`,
-  google_token_loc:      GOOGLE_TOKEN_LOC,
-  google_scope:          GOOGLE_SCOPE,
-  google_client_id:      GOOGLE_CLIENT_ID,
-  google_client_secret:  GOOGLE_CLIENT_SEC,
-  google_redirect_uri:   GOOGLE_REDIRECT_URI,
 });
 
 export type BotMasterConfig = {
@@ -128,81 +113,10 @@ export const bot_master_config: BotMasterConfig = Object.freeze({
 });
 
 export type GuildHandlerConfig = {
-  ui_refresh_rate:      number;
-  notification_life:    number;
-  show_queue_items:     number;
-  max_yt_results:       number;
-  show_num_items:       number;
-  max_response_wait:    number;
-  mongodb_uri:          string;
-  discord_token:        string;
+  discord_token:     string;
+  max_response_wait: number;
 };
-export const gh_config: GuildHandlerConfig = Object.freeze({
-  ui_refresh_rate:      35,
-  notification_life:    10,
-  show_queue_items:     5,
-  max_yt_results:       MAX_YT_RESULTS,
-  show_num_items:       SHOW_NUM_ITEMS,
-  max_response_wait:    MAX_RESPONSE_WAIT,
-  mongodb_uri:          MONGODB_URI,
-  discord_token:        DISCORD_TOKEN,
+export const guild_config: GuildHandlerConfig = Object.freeze({
+  discord_token:     DISCORD_TOKEN,
+  max_response_wait: MAX_RESPONSE_WAIT
 });
-
-export type UIConfig = {
-  progress_bar_lenght:  number;
-  max_song_info_lenght: number;
-};
-export const ui_config: UIConfig = Object.freeze({
-  progress_bar_lenght:  PROGRESS_BAR_LENGTH,
-  max_song_info_lenght: MAX_SONG_INFO_LENGTH,
-})
-
-export type AudioConfig = {
-  NIGHTCORE_AUDIO_FREQUENCY: number;
-  REFRESH_PLAYLIST_INTERVAL: number;
-  MAX_READ_RETRY:   number;
-  LARGE_CHUNK_SIZE: number;
-  SMALL_CHUNK_SIZE: number;
-  SEC_PCM_SIZE:     number;
-  PCM_FORMAT:       string;
-  AUDIO_CHANNELS:   number;
-  AUDIO_FREQUENCY:  number;
-}
-export const audio_config: AudioConfig = Object.freeze({
-  NIGHTCORE_AUDIO_FREQUENCY: 22000,
-  REFRESH_PLAYLIST_INTERVAL: 500,
-  MAX_READ_RETRY:   4,
-  LARGE_CHUNK_SIZE: 2048,
-  SMALL_CHUNK_SIZE: 256,
-  SEC_PCM_SIZE:     4,
-  PCM_FORMAT:       "none",
-  AUDIO_CHANNELS:   2,
-  AUDIO_FREQUENCY:  44100,
-})
-
-export type SearchConfig = {
-  ITEMS_PER_PAGE:   number;
-  SEARCH_DISTANCE:  number;
-  SEARCH_THRESHOLD: number;
-}
-export const search_config: SearchConfig = Object.freeze({
-  ITEMS_PER_PAGE:   5,
-  SEARCH_DISTANCE:  5,
-  SEARCH_THRESHOLD: 5
-})
-
-export type DBConfig = {
-	DATABASE_ACCESS_WAIT:      number;
-	MAX_UPDATES_BEFORE_SAVE:   number;
-	GUILDDATA_COLLECTION_NAME: string;
-	MONGODB_DBNAME:            string;
-	MAX_DATABASE_RETRY_WAIT:   number;
-
-}
-export const db_config: DBConfig = Object.freeze({
-  DATABASE_ACCESS_WAIT:      100,
-	MAX_UPDATES_BEFORE_SAVE:   2,
-	GUILDDATA_COLLECTION_NAME: 'bebra',
-	MONGODB_DBNAME:            'bebraBase',
-	MAX_DATABASE_RETRY_WAIT:   5
-})

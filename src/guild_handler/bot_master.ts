@@ -1,16 +1,26 @@
-import winston from 'winston';
 
-import GHInterface from '../guild_handler/guild_handler_interface';
-import { bot_master_config } from '../constants/constants';
 import Logger from '../logger/logger';
 
+export class GuildHandlerInterface {
+	private _log: Logger;
+	private _id:  string;
+
+	constructor(id: string, log: Logger) {
+		this._id = id;
+		this._log = log;
+	}
+
+	removeGuild() {
+		//remove
+	}
+};
 /**
  * @name BotMaster
  * Handles adding, getting, and removing guild handlers
  */
 export default class BotMaster {
 	private _log: Logger;
-	private _guildList: { [key: string]: GHInterface };
+	private _guildList: { [key: string]: GuildHandlerInterface };
 
 	/**
 	 * @param logger - logger object
@@ -26,7 +36,7 @@ export default class BotMaster {
 	 * @param id - discord guild id
 	 * @return GHInterface or undefined if not found
 	 */
-	getGuild(id: string): GHInterface | undefined { return this._guildList[id]; }
+	getGuild(id: string): GuildHandlerInterface | undefined { return this._guildList[id]; }
 
 	/**
 	 * @name newGuild()
@@ -36,7 +46,7 @@ export default class BotMaster {
 	 */
 	newGuild(id: string): void {
 		if (!this.getGuild(id)) {
-			const newGuild = new GHInterface(id, this._log);
+			const newGuild = new GuildHandlerInterface(id, this._log);
 			this._guildList[id] = newGuild;
 		}
 	}
